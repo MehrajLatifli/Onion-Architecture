@@ -24,6 +24,7 @@ namespace API.Controllers
         }
 
 
+
         [HttpPost("product")]
         public async Task<IActionResult> AddAsync(VM_Create_Product model)
         {
