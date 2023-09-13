@@ -1,20 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace Persistence.Contexts
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<APIDbContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<OnionArchitectureDbContext>
     {
-        public APIDbContext CreateDbContext(string[] args)
+        public OnionArchitectureDbContext CreateDbContext(string[] args)
         {
 
 
-            DbContextOptionsBuilder<APIDbContext> optionsBuilder = new DbContextOptionsBuilder<APIDbContext>();
+            DbContextOptionsBuilder<OnionArchitectureDbContext> optionsBuilder = new DbContextOptionsBuilder<OnionArchitectureDbContext>();
 
             optionsBuilder.UseNpgsql(Configuration.PostgreSQLConnectionString);
 
-            return new APIDbContext(optionsBuilder.Options);
+            return new OnionArchitectureDbContext(optionsBuilder.Options);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain.Entities.Common;
+using Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Persistence.Contexts;
@@ -9,9 +10,9 @@ namespace Persistence.Repositories
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
 
-        private readonly APIDbContext _context;
+        private readonly OnionArchitectureDbContext _context;
 
-        public WriteRepository(APIDbContext context)
+        public WriteRepository(OnionArchitectureDbContext context)
         {
             _context = context;
         }

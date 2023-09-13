@@ -1,5 +1,6 @@
 ﻿using Application.Repositories.Custom;
 using Domain.Entities;
+using Domain.Entities.Models;
 using Persistence.Contexts;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Persistence.Repositories.Custom
 {
     public class CustomerWriteRepository : WriteRepository<Customer>, ICustomerWriteRepository
     {
-        public CustomerWriteRepository(APIDbContext context) : base(context)
+        public CustomerWriteRepository(OnionArchitectureDbContext context) : base(context)
         {
         }
     }

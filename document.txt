@@ -1,0 +1,109 @@
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql(Configuration.PostgreSQLConnectionString);
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var P = ChangeTracker.Entries<Product>();
+
+        foreach (var entry in P)
+        {
+            if (entry.Entity is Product entity)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entity.Id = Guid.NewGuid();
+                    entity.Createdate = DateTime.UtcNow;
+                }
+
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.State = EntityState.Modified;
+                    entity.Updatedate = DateTime.UtcNow;
+                }
+
+                if (entry.State == EntityState.Deleted)
+                {
+                    entry.State = EntityState.Deleted;
+                    entity.Deletedate = DateTime.UtcNow;
+                }
+            }
+        }
+
+        var C = ChangeTracker.Entries<Customer>();
+
+        foreach (var entry in C)
+        {
+            if (entry.Entity is Customer entity)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entity.Id = Guid.NewGuid();
+                    entity.Createdate = DateTime.UtcNow;
+                }
+
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.State = EntityState.Modified;
+                    entity.Updatedate = DateTime.UtcNow;
+                }
+
+                if (entry.State == EntityState.Deleted)
+                {
+                    entry.State = EntityState.Deleted;
+                    entity.Deletedate = DateTime.UtcNow;
+                }
+            }
+        }
+
+        var O = ChangeTracker.Entries<Order>();
+
+        foreach (var entry in O)
+        {
+            if (entry.Entity is Order entity)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entity.Id = Guid.NewGuid();
+                    entity.Createdate = DateTime.UtcNow;
+                }
+
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.State = EntityState.Modified;
+                    entity.Updatedate = DateTime.UtcNow;
+                }
+
+                if (entry.State == EntityState.Deleted)
+                {
+                    entry.State = EntityState.Deleted;
+                    entity.Deletedate = DateTime.UtcNow;
+                }
+            }
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+
+
+public partial class Product : BaseEntity
+{
+    public Guid Id { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public int Stock { get; set; }
+
+    public double Price { get; set; }
+
+    public DateTime Createdate { get; set; }
+
+    public DateTime Updatedate { get; set; }
+
+    public DateTime Deletedate { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+}

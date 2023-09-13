@@ -13,5 +13,7 @@ namespace Application.ViewModels.Products
         public int Stock { get; set; }
 
         public double Price { get; set; }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain.Entities.Common;
+using Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
 using System;
@@ -15,9 +16,9 @@ namespace Persistence.Repositories
     public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
     {
 
-        private readonly APIDbContext _context;
+        private readonly OnionArchitectureDbContext _context;
 
-        public ReadRepository(APIDbContext context)
+        public ReadRepository(OnionArchitectureDbContext context)
         {
             _context = context;
         }

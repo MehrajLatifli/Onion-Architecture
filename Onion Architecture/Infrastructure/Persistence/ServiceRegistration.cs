@@ -1,5 +1,6 @@
 ﻿
 using Application.Repositories.Custom;
+using Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
@@ -27,7 +28,7 @@ namespace Persistence
             //services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
             //services.AddSingleton<IProductReadRepository, ProductReadRepository>();
 
-            services.AddDbContext<APIDbContext>(options => options.UseNpgsql(Configuration.PostgreSQLConnectionString));
+            services.AddDbContext<OnionArchitectureDbContext>(options => options.UseNpgsql(Configuration.PostgreSQLConnectionString));
 
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
