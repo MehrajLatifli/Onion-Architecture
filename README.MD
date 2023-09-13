@@ -11,9 +11,9 @@
 
 <p> Application (Repository, Service, Interface): DTO, ViewModel, Mapping, Validators, CQRS Pattern </p>
 
-<p> Persistence: DbContext, Migrations, Configurations, Seeding, Reository Concrete class </p>
+<p> Persistence: DbContext, Migrations, Configurations, Seeding, Repository Concrete class </p>
 
-<p> Infrastructure: Other services </p>
+<p> Infrastructure: Other services (do not belong DB) </p>
 
 <p> Presentation: Web app, Web API, Deskop app </p>
 
