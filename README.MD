@@ -6,4 +6,4 @@ Scaffold-DbContext "Host=localhost;Port=5432;Database=OnionArchitecture_Db;Usern
 
 <p> add-migration mig_1 -Context Persistence.Contexts.APIDbContext </p>
 
-<img src="https://raw.githubusercontent.com/MehrajLatifli/Onion-Architecture/master/Onion%20Architecture.png?token=GHSAT0AAAAAACHP4LN3R6HOILBPM5RKEXY6ZIBAA4Q" alt="Onion Architecture" width="500">
+<img src="https://github.com/MehrajLatifli/Onion-Architecture/blob/master/Onion%20Architecture.png" alt="Onion Architecture" width="500">
