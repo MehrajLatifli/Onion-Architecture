@@ -2,7 +2,7 @@
 {
     public class VM_Create_Customer
     {
-        public string Name { get; set; }
+        public string name { get; set; }
 
 
     }

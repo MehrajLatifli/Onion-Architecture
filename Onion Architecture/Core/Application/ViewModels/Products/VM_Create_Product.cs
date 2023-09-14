@@ -8,11 +8,11 @@ namespace Application.ViewModels.Products
 {
     public class VM_Create_Product
     {
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public int Stock { get; set; }
+        public int stock { get; set; }
 
-        public double Price { get; set; }
+        public double price { get; set; }
 
 
     }

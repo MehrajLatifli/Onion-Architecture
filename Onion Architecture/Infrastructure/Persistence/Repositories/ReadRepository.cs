@@ -16,9 +16,9 @@ namespace Persistence.Repositories
     public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
     {
 
-        private readonly OnionArchitectureDbContext _context;
+        private readonly OnionArchitecture_DbContext _context;
 
-        public ReadRepository(OnionArchitectureDbContext context)
+        public ReadRepository(OnionArchitecture_DbContext context)
         {
             _context = context;
         }
@@ -48,7 +48,7 @@ namespace Persistence.Repositories
                 query = Table.AsNoTracking();
             }
 
-            return await query.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
+            return await query.FirstOrDefaultAsync(data => data.id == Guid.Parse(id));
         }
 
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)

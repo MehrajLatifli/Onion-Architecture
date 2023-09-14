@@ -7,7 +7,7 @@ namespace Persistence.Repositories.Custom
 {
     public class OrderReadRepository : ReadRepository<Order>, IOrderReadRepository
     {
-        public OrderReadRepository(OnionArchitectureDbContext context) : base(context)
+        public OrderReadRepository(OnionArchitecture_DbContext context) : base(context)
         {
         }
     }

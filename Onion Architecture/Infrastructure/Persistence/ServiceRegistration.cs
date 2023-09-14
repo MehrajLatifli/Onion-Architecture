@@ -28,7 +28,7 @@ namespace Persistence
             //services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
             //services.AddSingleton<IProductReadRepository, ProductReadRepository>();
 
-            services.AddDbContext<OnionArchitectureDbContext>(options => options.UseNpgsql(Configuration.PostgreSQLConnectionString));
+            services.AddDbContext<OnionArchitecture_DbContext>(options => options.UseNpgsql(ConfigurationSQL.PostgreSQLConnectionString));
 
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();

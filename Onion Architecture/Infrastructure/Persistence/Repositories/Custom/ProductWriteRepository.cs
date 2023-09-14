@@ -7,7 +7,7 @@ namespace Persistence.Repositories.Custom
 {
     public class ProductWriteRepository : WriteRepository<Product>, IProductWriteRepository
     {
-        public ProductWriteRepository(OnionArchitectureDbContext context) : base(context)
+        public ProductWriteRepository(OnionArchitecture_DbContext context) : base(context)
         {
         }
     }

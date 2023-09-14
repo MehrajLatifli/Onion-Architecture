@@ -10,9 +10,9 @@ namespace Persistence.Repositories
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
 
-        private readonly OnionArchitectureDbContext _context;
+        private readonly OnionArchitecture_DbContext _context;
 
-        public WriteRepository(OnionArchitectureDbContext context)
+        public WriteRepository(OnionArchitecture_DbContext context)
         {
             _context = context;
         }
@@ -44,7 +44,7 @@ namespace Persistence.Repositories
 
         public async Task<bool> RemoveByIdAsync(string id)
         {
-           T model =  await Table.FirstOrDefaultAsync(data =>data.Id == Guid.Parse(id));
+           T model =  await Table.FirstOrDefaultAsync(data =>data.id == Guid.Parse(id));
 
            return  Remove(model);
         }

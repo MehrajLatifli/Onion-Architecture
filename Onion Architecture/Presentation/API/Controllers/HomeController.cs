@@ -40,9 +40,9 @@ namespace API.Controllers
 
             _productWriteRepository.AddAsync(new Product
             {
-                Name = model.Name,
-                Price = model.Price,
-                Stock = model.Stock,
+                name = model.name,
+                price = model.price,
+                stock = model.stock,
             });
 
             await _productWriteRepository.SaveAsync();
@@ -55,13 +55,13 @@ namespace API.Controllers
         [HttpPut("product")]
         public async Task<IActionResult> Update(VM_Update_Product model)
         {
-            if (!Guid.TryParse(model.Id, out Guid idGuid))
+            if (!Guid.TryParse(model.id, out Guid idGuid))
             {
                 return BadRequest("Id is not a valid Guid.");
             }
 
 
-            var existingProduct = await _productReadRepository.GetByIdAsync(model.Id,false);
+            var existingProduct = await _productReadRepository.GetByIdAsync(model.id,false);
 
             if (existingProduct == null)
             {
@@ -70,10 +70,10 @@ namespace API.Controllers
 
             var productToUpdate = new Product
             {
-                Id = new Guid(model.Id),
-                Name = model.Name,
-                Price = model.Price,
-                Stock = model.Stock,
+                id = new Guid(model.id),
+                name = model.name,
+                price = model.price,
+                stock = model.stock,
             };
 
             _productWriteRepository.Update(productToUpdate);
@@ -153,7 +153,7 @@ namespace API.Controllers
 
             _customerWriteRepository.AddAsync(new Customer
             {
-                Name = model.Name,
+                name = model.name,
             });
 
             await _customerWriteRepository.SaveAsync();
@@ -166,13 +166,13 @@ namespace API.Controllers
         [HttpPut("customer")]
         public async Task<IActionResult> Update2(VM_Update_Customer model)
         {
-            if (!Guid.TryParse(model.Id, out Guid idGuid))
+            if (!Guid.TryParse(model.id, out Guid idGuid))
             {
                 return BadRequest("Id is not a valid Guid.");
             }
 
 
-            var existing = await _customerReadRepository.GetByIdAsync(model.Id, false);
+            var existing = await _customerReadRepository.GetByIdAsync(model.id, false);
 
             if (existing == null)
             {
@@ -181,8 +181,8 @@ namespace API.Controllers
 
             var Update = new Customer
             {
-                Id = new Guid(model.Id),
-                Name = model.Name,
+                id = new Guid(model.id),
+                name = model.name,
             };
 
             _customerWriteRepository.Update(Update);
@@ -259,22 +259,22 @@ namespace API.Controllers
         public async Task<IActionResult> AddAsync3(VM_Create_Order model)
         {
 
-            if (model.CustomeridFororder== new Guid( "3fa85f64-5717-4562-b3fc-2c963f66afa6"))
+            if (model.customerid_fororder== new Guid( "3fa85f64-5717-4562-b3fc-2c963f66afa6"))
             {
-                return BadRequest("CustomeridFororder is not a valid Guid.");
+                return BadRequest("customeridFororder is not a valid Guid.");
             }
 
-            if (model.ProductidFororder == new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"))
+            if (model.productid_fororder == new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"))
             {
                 return BadRequest("ProductidFororder is not a valid Guid.");
             }
 
             _orderWriteRepository.AddAsync(new Order
             {
-                Description = model.Description,
-                Address=model.Description,
-                CustomeridFororder=model.CustomeridFororder,
-                ProductidFororder=model.ProductidFororder,
+                description = model.description,
+                address=model.address,
+                customerid_fororder=model.customerid_fororder,
+                productid_fororder=model.productid_fororder,
             });
 
             await _orderWriteRepository.SaveAsync();
@@ -287,13 +287,13 @@ namespace API.Controllers
         [HttpPut("order")]
         public async Task<IActionResult> Update3(VM_Update_Order model)
         {
-            if (!Guid.TryParse(model.Id, out Guid idGuid))
+            if (!Guid.TryParse(model.id, out Guid idGuid))
             {
                 return BadRequest("Id is not a valid Guid.");
             }
 
 
-            var existing = await _orderReadRepository.GetByIdAsync(model.Id, false);
+            var existing = await _orderReadRepository.GetByIdAsync(model.id, false);
 
 
 
@@ -304,11 +304,11 @@ namespace API.Controllers
 
             var Update = new Order
             {
-                Id = new Guid(model.Id),
-                Description = model.Description,
-                Address = model.Description,
-                CustomeridFororder = new Guid( model.CustomeridFororder),
-                ProductidFororder = new Guid(model.ProductidFororder),
+                id = new Guid(model.id),
+                description = model.description,
+                address = model.address,
+                customerid_fororder = new Guid( model.customerid_fororder),
+                productid_fororder = new Guid(model.productid_fororder),
             };
 
             _orderWriteRepository.Update(Update);

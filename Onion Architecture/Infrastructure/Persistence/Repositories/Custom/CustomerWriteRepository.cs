@@ -12,7 +12,7 @@ namespace Persistence.Repositories.Custom
 {
     public class CustomerWriteRepository : WriteRepository<Customer>, ICustomerWriteRepository
     {
-        public CustomerWriteRepository(OnionArchitectureDbContext context) : base(context)
+        public CustomerWriteRepository(OnionArchitecture_DbContext context) : base(context)
         {
         }
     }

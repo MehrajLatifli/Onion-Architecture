@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    static class Configuration
+    static class ConfigurationSQL
     {
         public static string PostgreSQLConnectionString
         {

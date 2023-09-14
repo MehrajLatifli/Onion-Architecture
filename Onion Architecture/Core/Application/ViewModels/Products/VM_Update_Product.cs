@@ -2,11 +2,11 @@
 {
     public class VM_Update_Product
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
 
-        public int Stock { get; set; }
+        public int stock { get; set; }
 
-        public double Price { get; set; }
+        public double price { get; set; }
     }
 }

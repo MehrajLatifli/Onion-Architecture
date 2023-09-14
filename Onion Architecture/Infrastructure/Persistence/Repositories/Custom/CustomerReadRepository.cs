@@ -7,7 +7,7 @@ namespace Persistence.Repositories.Custom
 {
     public class CustomerReadRepository : ReadRepository<Customer>, ICustomerReadRepository
     {
-        public CustomerReadRepository(OnionArchitectureDbContext context) : base(context)
+        public CustomerReadRepository(OnionArchitecture_DbContext context) : base(context)
         {
         }
     }

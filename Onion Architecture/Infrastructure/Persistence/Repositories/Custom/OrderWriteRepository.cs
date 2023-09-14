@@ -7,7 +7,7 @@ namespace Persistence.Repositories.Custom
 {
     public class OrderWriteRepository : WriteRepository<Order>, IOrderWriteRepository
     {
-        public OrderWriteRepository(OnionArchitectureDbContext context) : base(context)
+        public OrderWriteRepository(OnionArchitecture_DbContext context) : base(context)
         {
         }
     }

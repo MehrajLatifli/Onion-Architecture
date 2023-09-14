@@ -5,17 +5,17 @@ using Microsoft.Extensions.Configuration;
 
 namespace Persistence.Contexts
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<OnionArchitectureDbContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<OnionArchitecture_DbContext>
     {
-        public OnionArchitectureDbContext CreateDbContext(string[] args)
+        public OnionArchitecture_DbContext CreateDbContext(string[] args)
         {
 
 
-            DbContextOptionsBuilder<OnionArchitectureDbContext> optionsBuilder = new DbContextOptionsBuilder<OnionArchitectureDbContext>();
+            DbContextOptionsBuilder<OnionArchitecture_DbContext> optionsBuilder = new DbContextOptionsBuilder<OnionArchitecture_DbContext>();
 
-            optionsBuilder.UseNpgsql(Configuration.PostgreSQLConnectionString);
+            optionsBuilder.UseNpgsql(ConfigurationSQL.PostgreSQLConnectionString);
 
-            return new OnionArchitectureDbContext(optionsBuilder.Options);
+            return new OnionArchitecture_DbContext(optionsBuilder.Options);
         }
     }
 }

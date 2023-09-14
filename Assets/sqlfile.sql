@@ -37,14 +37,14 @@ CREATE TABLE "Order"
     CustomerId_forOrder uuid NOT NULL,
     ProductId_forOrder uuid NOT NULL,
     
-    CONSTRAINT FK_CustomerId_forOrder FOREIGN KEY (CustomerId_forOrder) REFERENCES "Customer" (Id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT FK_ProductId_forOrder FOREIGN KEY (ProductId_forOrder) REFERENCES "Product" (Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT FK_CustomerId_forOrder FOREIGN KEY (CustomerId_forOrder) REFERENCES "Customer" (Id) ON DELETE CASCADE ON UPDATE NO Action,
+    CONSTRAINT FK_ProductId_forOrder FOREIGN KEY (ProductId_forOrder) REFERENCES "Product" (Id) ON DELETE CASCADE ON UPDATE NO Action
 );
 
 
-select * from  "Product" p 
+select * from  "Product" p;
 
-select * from  "Customer" c
+select * from  "Customer" c;
 
-select * from  "Order" o 
+select * from  "Order" o ;
 
