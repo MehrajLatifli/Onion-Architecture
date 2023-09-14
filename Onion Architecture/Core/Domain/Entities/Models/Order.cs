@@ -12,29 +12,30 @@ namespace Domain.Entities.Models;
 public partial class Order : BaseEntity
 {
     [Key]
-    public Guid id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     [Required]
-    public string description { get; set; }
+    public string Description { get; set; }
 
     [Required]
-    public string address { get; set; }
+    public string Address { get; set; }
 
-    public DateTime createdate { get; set; }
+    public DateTime CreateDate { get; set; }
 
-    public DateTime updatedate { get; set; }
+    public DateTime UpdateDate { get; set; }
 
-    public DateTime deletedate { get; set; }
+    public DateTime DeleteDate { get; set; }
 
-    public Guid customerid_fororder { get; set; }
+    public int CustomerId_forOrder { get; set; }
 
-    public Guid productid_fororder { get; set; }
+    public int ProductId_forOrder { get; set; }
 
-    [ForeignKey("customerid_fororder")]
+    [ForeignKey("CustomerId_forOrder")]
     [InverseProperty("Order")]
-    public virtual Customer customerid_fororderNavigation { get; set; }
+    public virtual Customer CustomerId_forOrderNavigation { get; set; }
 
-    [ForeignKey("productid_fororder")]
+    [ForeignKey("ProductId_forOrder")]
     [InverseProperty("Order")]
-    public virtual Product productid_fororderNavigation { get; set; }
+    public virtual Product ProductId_forOrderNavigation { get; set; }
 }

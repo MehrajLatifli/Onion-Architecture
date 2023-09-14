@@ -44,7 +44,7 @@ namespace Persistence.Repositories
 
         public async Task<bool> RemoveByIdAsync(string id)
         {
-           T model =  await Table.FirstOrDefaultAsync(data =>data.id == Guid.Parse(id));
+           T model =  await Table.FirstOrDefaultAsync(data =>data.Id == Convert.ToInt32(id));
 
            return  Remove(model);
         }

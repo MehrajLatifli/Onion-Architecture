@@ -8,10 +8,6 @@ namespace Domain.Entities.Common
 {
     public class BaseEntity
     {
-        public Guid id { get; set; }
-        //public DateTime CreateDate { get; set; }
-        //public DateTime UpdateDate { get; set; }
-
-        //public DateTime DeleteDate { get; set; }
+        public int Id { get; set; }
     }
 }

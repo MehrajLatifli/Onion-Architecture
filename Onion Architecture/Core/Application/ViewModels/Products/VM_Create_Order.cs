@@ -7,9 +7,9 @@
         public string address { get; set; }
 
 
-        public Guid customerid_fororder { get; set; }
+        public int customerid_fororder { get; set; }
 
-        public Guid productid_fororder { get; set; }
+        public int productid_fororder { get; set; }
 
 
     }

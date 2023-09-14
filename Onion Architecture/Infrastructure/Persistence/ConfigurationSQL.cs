@@ -9,7 +9,7 @@ namespace Persistence
 {
     static class ConfigurationSQL
     {
-        public static string PostgreSQLConnectionString
+        public static string ConnectionString
         {
             get
             {

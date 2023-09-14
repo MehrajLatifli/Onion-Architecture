@@ -12,21 +12,22 @@ namespace Domain.Entities.Models;
 public partial class Product : BaseEntity
 {
     [Key]
-    public Guid id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     [Required]
-    public string name { get; set; }
+    public string Name { get; set; }
 
-    public int stock { get; set; }
+    public int Stock { get; set; }
 
-    public double price { get; set; }
+    public double Price { get; set; }
 
-    public DateTime createdate { get; set; }
+    public DateTime CreateDate { get; set; }
 
-    public DateTime updatedate { get; set; }
+    public DateTime UpdateDate { get; set; }
 
-    public DateTime deletedate { get; set; }
+    public DateTime DeleteDate { get; set; }
 
-    [InverseProperty("productid_fororderNavigation")]
+    [InverseProperty("ProductId_forOrderNavigation")]
     public virtual ICollection<Order> Order { get; set; } = new List<Order>();
 }

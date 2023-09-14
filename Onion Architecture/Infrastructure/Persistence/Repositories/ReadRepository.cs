@@ -48,7 +48,7 @@ namespace Persistence.Repositories
                 query = Table.AsNoTracking();
             }
 
-            return await query.FirstOrDefaultAsync(data => data.id == Guid.Parse(id));
+            return await query.FirstOrDefaultAsync(data => data.Id == Convert.ToInt32(id));
         }
 
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)

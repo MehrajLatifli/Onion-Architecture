@@ -16,19 +16,19 @@
    "T4TemplatePath": null,
    "Tables": [
       {
-         "Name": "public.Customer",
+         "Name": "[dbo].[Customer]",
          "ObjectType": 0
       },
       {
-         "Name": "public.Order",
+         "Name": "[dbo].[Order]",
          "ObjectType": 0
       },
       {
-         "Name": "public.Product",
+         "Name": "[dbo].[Product]",
          "ObjectType": 0
       }
    ],
-   "UiHint": ".OnionArchitecture_Db",
+   "UiHint": "sql2.OnionArchitecture_Db.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,

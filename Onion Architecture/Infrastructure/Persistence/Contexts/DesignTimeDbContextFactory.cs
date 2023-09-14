@@ -13,7 +13,7 @@ namespace Persistence.Contexts
 
             DbContextOptionsBuilder<OnionArchitecture_DbContext> optionsBuilder = new DbContextOptionsBuilder<OnionArchitecture_DbContext>();
 
-            optionsBuilder.UseNpgsql(ConfigurationSQL.PostgreSQLConnectionString);
+            optionsBuilder.UseSqlServer(ConfigurationSQL.ConnectionString);
 
             return new OnionArchitecture_DbContext(optionsBuilder.Options);
         }

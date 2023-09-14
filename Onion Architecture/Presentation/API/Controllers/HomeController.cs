@@ -40,9 +40,9 @@ namespace API.Controllers
 
             _productWriteRepository.AddAsync(new Product
             {
-                name = model.name,
-                price = model.price,
-                stock = model.stock,
+                Name = model.name,
+                Price = model.price,
+                Stock = model.stock,
             });
 
             await _productWriteRepository.SaveAsync();
@@ -55,13 +55,10 @@ namespace API.Controllers
         [HttpPut("product")]
         public async Task<IActionResult> Update(VM_Update_Product model)
         {
-            if (!Guid.TryParse(model.id, out Guid idGuid))
-            {
-                return BadRequest("Id is not a valid Guid.");
-            }
+       
 
 
-            var existingProduct = await _productReadRepository.GetByIdAsync(model.id,false);
+            var existingProduct = await _productReadRepository.GetByIdAsync(model.id.ToString(),false);
 
             if (existingProduct == null)
             {
@@ -70,10 +67,10 @@ namespace API.Controllers
 
             var productToUpdate = new Product
             {
-                id = new Guid(model.id),
-                name = model.name,
-                price = model.price,
-                stock = model.stock,
+                Id = model.id,
+                Name = model.name,
+                Price = model.price,
+                Stock = model.stock,
             };
 
             _productWriteRepository.Update(productToUpdate);
@@ -90,15 +87,20 @@ namespace API.Controllers
         [HttpDelete("product/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            if (!Guid.TryParse(id, out Guid idGuid))
+
+            if (_productReadRepository.GetAll().Any(i => i.Id == Convert.ToInt32(id)))
             {
-                return BadRequest("Id is not a valid Guid.");
+
+                await _productWriteRepository.RemoveByIdAsync(id);
+                await _productWriteRepository.SaveAsync();
+
+                return Ok();
             }
 
-            await _productWriteRepository.RemoveByIdAsync(id);
-            await _productWriteRepository.SaveAsync();
-
-            return Ok();
+            else
+            {
+                return BadRequest();
+            }
 
         }
 
@@ -153,7 +155,7 @@ namespace API.Controllers
 
             _customerWriteRepository.AddAsync(new Customer
             {
-                name = model.name,
+                Name = model.name,
             });
 
             await _customerWriteRepository.SaveAsync();
@@ -166,13 +168,10 @@ namespace API.Controllers
         [HttpPut("customer")]
         public async Task<IActionResult> Update2(VM_Update_Customer model)
         {
-            if (!Guid.TryParse(model.id, out Guid idGuid))
-            {
-                return BadRequest("Id is not a valid Guid.");
-            }
+      
 
 
-            var existing = await _customerReadRepository.GetByIdAsync(model.id, false);
+            var existing = await _customerReadRepository.GetByIdAsync(model.id.ToString(), false);
 
             if (existing == null)
             {
@@ -181,8 +180,8 @@ namespace API.Controllers
 
             var Update = new Customer
             {
-                id = new Guid(model.id),
-                name = model.name,
+                Id = model.id,
+                Name = model.name,
             };
 
             _customerWriteRepository.Update(Update);
@@ -199,15 +198,18 @@ namespace API.Controllers
         [HttpDelete("customer/{id}")]
         public async Task<IActionResult> Delete2(string id)
         {
-            if (!Guid.TryParse(id, out Guid idGuid))
+            if (_customerReadRepository.GetAll().Any(i => i.Id == Convert.ToInt32(id)))
             {
-                return BadRequest("Id is not a valid Guid.");
+
+                await _customerWriteRepository.RemoveByIdAsync(id);
+                await _customerWriteRepository.SaveAsync();
+
+                return Ok();
             }
-
-            await _customerWriteRepository.RemoveByIdAsync(id);
-            await _customerWriteRepository.SaveAsync();
-
-            return Ok();
+            else
+            {
+                return BadRequest();
+            }
 
         }
 
@@ -259,22 +261,14 @@ namespace API.Controllers
         public async Task<IActionResult> AddAsync3(VM_Create_Order model)
         {
 
-            if (model.customerid_fororder== new Guid( "3fa85f64-5717-4562-b3fc-2c963f66afa6"))
-            {
-                return BadRequest("customeridFororder is not a valid Guid.");
-            }
 
-            if (model.productid_fororder == new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"))
-            {
-                return BadRequest("ProductidFororder is not a valid Guid.");
-            }
 
             _orderWriteRepository.AddAsync(new Order
             {
-                description = model.description,
-                address=model.address,
-                customerid_fororder=model.customerid_fororder,
-                productid_fororder=model.productid_fororder,
+                Description = model.description,
+                Address=model.address,
+                CustomerId_forOrder=model.customerid_fororder,
+                ProductId_forOrder=model.productid_fororder,
             });
 
             await _orderWriteRepository.SaveAsync();
@@ -287,13 +281,10 @@ namespace API.Controllers
         [HttpPut("order")]
         public async Task<IActionResult> Update3(VM_Update_Order model)
         {
-            if (!Guid.TryParse(model.id, out Guid idGuid))
-            {
-                return BadRequest("Id is not a valid Guid.");
-            }
+    
 
 
-            var existing = await _orderReadRepository.GetByIdAsync(model.id, false);
+            var existing = await _orderReadRepository.GetByIdAsync(model.id.ToString(), false);
 
 
 
@@ -304,11 +295,11 @@ namespace API.Controllers
 
             var Update = new Order
             {
-                id = new Guid(model.id),
-                description = model.description,
-                address = model.address,
-                customerid_fororder = new Guid( model.customerid_fororder),
-                productid_fororder = new Guid(model.productid_fororder),
+                Id = model.id,
+                Description = model.description,
+                Address = model.address,
+                CustomerId_forOrder = model.customerid_fororder,
+                ProductId_forOrder =model.customerid_fororder,
             };
 
             _orderWriteRepository.Update(Update);
@@ -325,15 +316,20 @@ namespace API.Controllers
         [HttpDelete("order/{id}")]
         public async Task<IActionResult> Delete3(string id)
         {
-            if (!Guid.TryParse(id, out Guid idGuid))
+            if (_orderReadRepository.GetAll().Any(i => i.Id == Convert.ToInt32(id)))
             {
-                return BadRequest("Id is not a valid Guid.");
+
+
+                await _orderWriteRepository.RemoveByIdAsync(id);
+                await _orderWriteRepository.SaveAsync();
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
 
-            await _orderWriteRepository.RemoveByIdAsync(id);
-            await _orderWriteRepository.SaveAsync();
-
-            return Ok();
 
         }
 

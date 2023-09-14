@@ -1,50 +1,50 @@
-CREATE DATABASE "OnionArchitecture_Db"
+CREATE DATABASE [OnionArchitecture_Db]
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+Use [OnionArchitecture_Db]
 
-CREATE TABLE "Product"
+CREATE TABLE [Product]
 (
-    Id  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    Name TEXT NOT NULL,
+    Id   INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    Name NVARCHAR(max) NOT NULL,
     Stock INTEGER NOT NULL,
     Price DOUBLE PRECISION NOT NULL,
-    CreateDate timestamp with time zone NOT NULL,
-    UpdateDate timestamp with time zone NOT NULL,
-    DeleteDate timestamp with time zone NOT NULL
+    CreateDate datetime2 NOT NULL default NULL, 
+    UpdateDate datetime2 NOT NULL default NULL, 
+    DeleteDate datetime2 NOT NULL default NULL, 
 );
 
 
-CREATE TABLE "Customer"
+CREATE TABLE [Customer]
 (
-    Id  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    Name TEXT NOT NULL,
-    CreateDate timestamp with time zone NOT NULL,
-    UpdateDate timestamp with time zone NOT NULL,
-    DeleteDate timestamp with time zone NOT NULL
+    Id   INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    Name NVARCHAR(max) NOT NULL,
+    CreateDate datetime2 NOT NULL default NULL, 
+    UpdateDate datetime2 NOT NULL default NULL, 
+    DeleteDate datetime2 NOT NULL default NULL, 
 );
 
 
 
-CREATE TABLE "Order"
+CREATE TABLE [Order]
 (
-    Id  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    Description TEXT NOT NULL,
-    Address TEXT NOT NULL,
-    CreateDate timestamp with time zone NOT NULL,
-    UpdateDate timestamp with time zone NOT NULL,
-    DeleteDate timestamp with time zone NOT NULL,
+    Id   INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+    Description NVARCHAR(max) NOT NULL,
+    Address NVARCHAR(max) NOT NULL,
+    CreateDate datetime2 NOT NULL default NULL, 
+    UpdateDate datetime2 NOT NULL default NULL, 
+    DeleteDate datetime2 NOT NULL default NULL,  
     
-    CustomerId_forOrder uuid NOT NULL,
-    ProductId_forOrder uuid NOT NULL,
+    CustomerId_forOrder  int NOT NULL,
+    ProductId_forOrder  int NOT NULL,
     
-    CONSTRAINT FK_CustomerId_forOrder FOREIGN KEY (CustomerId_forOrder) REFERENCES "Customer" (Id) ON DELETE CASCADE ON UPDATE NO Action,
-    CONSTRAINT FK_ProductId_forOrder FOREIGN KEY (ProductId_forOrder) REFERENCES "Product" (Id) ON DELETE CASCADE ON UPDATE NO Action
+    CONSTRAINT FK_CustomerId_forOrder FOREIGN KEY (CustomerId_forOrder) REFERENCES "Customer" (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_ProductId_forOrder FOREIGN KEY (ProductId_forOrder) REFERENCES "Product" (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
-select * from  "Product" p;
+select * from  [Product] p;
 
-select * from  "Customer" c;
+select * from  [Customer] c;
 
-select * from  "Order" o ;
+select * from  [Order] o ;
 

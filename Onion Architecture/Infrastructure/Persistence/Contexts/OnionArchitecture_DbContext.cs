@@ -2,9 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Domain.Entities.Common;
 using Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace Persistence.Contexts;
 
@@ -27,122 +27,106 @@ public partial class OnionArchitecture_DbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-            => optionsBuilder.UseNpgsql(ConfigurationSQL.PostgreSQLConnectionString);
+        => optionsBuilder.UseSqlServer("Data Source=localhost,1430;Initial Catalog=OnionArchitecture_Db;User ID=sa;Password=admin1234@;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var P = ChangeTracker.Entries<Product>();
 
-        foreach (var entry in P)
+
+        foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.Entity is Product entity)
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entity.id = Guid.NewGuid();
-                    entity.createdate = DateTime.UtcNow;
+
+                    entity.CreateDate = DateTime.UtcNow;
                 }
 
 
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.State = EntityState.Modified;
-                    entity.updatedate = DateTime.UtcNow;
+
+                    entity.UpdateDate = DateTime.UtcNow;
                 }
 
                 if (entry.State == EntityState.Deleted)
                 {
-                    entry.State = EntityState.Deleted;
-                    entity.deletedate = DateTime.UtcNow;
+
+                    entity.DeleteDate = DateTime.UtcNow;
                 }
             }
-        }
 
-        var C = ChangeTracker.Entries<Customer>();
-
-        foreach (var entry in C)
-        {
-            if (entry.Entity is Customer entity)
+            if (entry.Entity is Customer entity2)
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entity.id = Guid.NewGuid();
-                    entity.createdate = DateTime.UtcNow;
+
+                    entity2.CreateDate = DateTime.UtcNow;
                 }
 
 
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.State = EntityState.Modified;
-                    entity.updatedate = DateTime.UtcNow;
+
+                    entity2.UpdateDate = DateTime.UtcNow;
                 }
 
                 if (entry.State == EntityState.Deleted)
                 {
-                    entry.State = EntityState.Deleted;
-                    entity.deletedate = DateTime.UtcNow;
+
+                    entity2.DeleteDate = DateTime.UtcNow;
                 }
             }
-        }
 
-        var O = ChangeTracker.Entries<Order>();
-
-        foreach (var entry in O)
-        {
-            if (entry.Entity is Order entity)
+            if (entry.Entity is Order entity3)
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entity.id = Guid.NewGuid();
-                    entity.createdate = DateTime.UtcNow;
+
+                    entity3.CreateDate = DateTime.UtcNow;
                 }
 
 
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.State = EntityState.Modified;
-                    entity.updatedate = DateTime.UtcNow;
+
+                    entity3.UpdateDate = DateTime.UtcNow;
                 }
 
                 if (entry.State == EntityState.Deleted)
                 {
-                    entry.State = EntityState.Deleted;
-                    entity.deletedate = DateTime.UtcNow;
+
+                    entity3.DeleteDate = DateTime.UtcNow;
                 }
             }
         }
+
+
+
 
         return await base.SaveChangesAsync(cancellationToken);
     }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresExtension("uuid-ossp");
-
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.id).HasName("Customer_pkey");
-
-            entity.Property(e => e.id).HasDefaultValueSql("uuid_generate_v4()");
+            entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC0760BF7BE7");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.id).HasName("Order_pkey");
+            entity.HasKey(e => e.Id).HasName("PK__Order__3214EC071FBB6D64");
 
-            entity.Property(e => e.id).HasDefaultValueSql("uuid_generate_v4()");
+            entity.HasOne(d => d.CustomerId_forOrderNavigation).WithMany(p => p.Order).HasConstraintName("FK_CustomerId_forOrder");
 
-            entity.HasOne(d => d.customerid_fororderNavigation).WithMany(p => p.Order).HasConstraintName("fk_customerid_fororder");
-
-            entity.HasOne(d => d.productid_fororderNavigation).WithMany(p => p.Order).HasConstraintName("fk_productid_fororder");
+            entity.HasOne(d => d.ProductId_forOrderNavigation).WithMany(p => p.Order).HasConstraintName("FK_ProductId_forOrder");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.id).HasName("Product_pkey");
-
-            entity.Property(e => e.id).HasDefaultValueSql("uuid_generate_v4()");
+            entity.HasKey(e => e.Id).HasName("PK__Product__3214EC0765057756");
         });
 
         OnModelCreatingPartial(modelBuilder);
